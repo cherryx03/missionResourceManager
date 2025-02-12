@@ -4,13 +4,13 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
-class CrewMember {
+class CrewMemberGUI {
     double weight;
     double age;
     double height;
     String gender;
 
-    public CrewMember(double weight, double age, double height, String gender) {
+    public CrewMemberGUI(double weight, double age, double height, String gender) {
         this.weight = weight;
         this.age = age;
         this.height = height;
@@ -43,26 +43,26 @@ class CrewMember {
     }
 }
 
-class MissionVehicle {
+class MissionVehicleGUI {
     double fuelCapacity;
     double startingOxygen;
     double missionLength;
     double food;
     int crewSize;
-    ArrayList<CrewMember> crewMembers;
+    ArrayList<CrewMemberGUI> CrewMemberGUIs;
 
-    public MissionVehicle(double fuelCapacity, double startingOxygen, double missionLength, double food, int crewSize) {
+    public MissionVehicleGUI(double fuelCapacity, double startingOxygen, double missionLength, double food, int crewSize) {
         this.fuelCapacity = fuelCapacity;
         this.startingOxygen = startingOxygen;
         this.missionLength = missionLength;
         this.food = food;
         this.crewSize = crewSize;
-        this.crewMembers = new ArrayList<>();
+        this.CrewMemberGUIs = new ArrayList<>();
     }
 
-    public void addCrewMember(CrewMember crewMember) {
-        if (crewMembers.size() < crewSize) {
-            crewMembers.add(crewMember);
+    public void addCrewMemberGUI(CrewMemberGUI CrewMemberGUI) {
+        if (CrewMemberGUIs.size() < crewSize) {
+            CrewMemberGUIs.add(CrewMemberGUI);
         }
     }
 
@@ -82,7 +82,7 @@ class MissionVehicle {
                 ", missionLength=" + missionLength +
                 ", food=" + food +
                 ", crewSize=" + crewSize +
-                ", crewMembers=" + crewMembers +
+                ", crewMembers=" + CrewMemberGUIs +
                 '}';
     }
 }
