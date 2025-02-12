@@ -1,7 +1,8 @@
 # missionResourceManager
 # Spacecraft Life Support Resource Simulator 
-SE 300 Group 6
-Kayden Cantu, Abigail Lane, Ryan Miller, Isaac Morrison, Caroline Wenks 
+SE 300 Spring '25
+
+Group 6: Kayden Cantu, Abigail Lane, Ryan Miller, Isaac Morrison, Caroline Wenks 
 
 ### Problem statement:  
 
