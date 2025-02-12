@@ -115,7 +115,7 @@ public class MissionSetupGUI {
                 double food = Double.parseDouble(foodField.getText());
                 int crewSize = Integer.parseInt(crewField.getText());
 
-                MissionVehicle vehicle = new MissionVehicle(fuelCapacity, startingOxygen, missionLength, food, crewSize);
+                MissionVehicleGUI vehicle = new MissionVehicleGUI(fuelCapacity, startingOxygen, missionLength, food, crewSize);
                 JOptionPane.showMessageDialog(frame, "Mission vehicle created: \n" + vehicle);
             }
         });
