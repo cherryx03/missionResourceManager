@@ -5,37 +5,41 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 class CrewMember {
+    String name;
     double weight;
     double age;
     double height;
     String gender;
 
-    public CrewMember(double weight, double age, double height, String gender) {
+    public CrewMember(String name, double weight, double age, double height, String gender) {
+        this.name = name;
         this.weight = weight;
         this.age = age;
         this.height = height;
         this.gender = gender;
     }
 
-    public double OConsumption(int missionLength) { // TODO: add more inputs (CrewMember attributes)
+    public double OConsumption(int missionLength) {
         double InitialO = 10.0;
         for (int i = 1; i <= missionLength; i++) {
-            InitialO -= 1.0; // TODO: change to real oxygen consumption calculation
+            InitialO -= 1.0;
         }
         return InitialO;
     }
 
-    public double FoodConsumption(int missionLength) { // TODO: add more inputs (CrewMember attributes)
+    public double FoodConsumption(int missionLength) {
         double Consumed = 0.0;
         for (int i = 1; i <= missionLength; i++) {
-            Consumed += 1.0; // TODO: change to real food consumption calculation
+            Consumed += 1.0;
         }
+        return Consumed;
     }
 
     @Override
     public String toString() {
         return "CrewMember{" +
-                "weight=" + weight +
+                "name='" + name + '\'' +
+                ", weight=" + weight +
                 ", age=" + age +
                 ", height=" + height +
                 ", gender='" + gender + '\'' +
@@ -66,10 +70,10 @@ class MissionVehicle {
         }
     }
 
-    public double FuelUse(double fuelCapacity) {
+    public double FuelUse() {
         double CurrentFuel = fuelCapacity;
         for (int day = 1; day <= missionLength; day++) {
-            CurrentFuel /= 1.5; // TODO: change to real fuel usage calculation
+            CurrentFuel /= 1.5;
         }
         return CurrentFuel;
     }
@@ -116,7 +120,7 @@ public class MissionSetupGUI {
                 int crewSize = Integer.parseInt(crewField.getText());
 
                 MissionVehicle vehicle = new MissionVehicle(fuelCapacity, startingOxygen, missionLength, food, crewSize);
-                JOptionPane.showMessageDialog(frame, "Mission vehicle created: \n" + vehicle);
+                JOptionPane.showMessageDialog(frame, "Mission Vehicle Created: \n" + vehicle);
             }
         });
 
