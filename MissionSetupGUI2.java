@@ -91,7 +91,7 @@ class MissionVehicle {
     }
 }
 
-public class MissionSetupGUI2 {
+public class MissionSetupGUI {
     public static void main(String[] args) {
         JFrame frame = new JFrame("Mission Setup");
         frame.setSize(600, 500);
