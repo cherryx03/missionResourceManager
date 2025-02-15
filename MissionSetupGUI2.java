@@ -99,15 +99,15 @@ public class MissionSetupGUI2 {
         frame.setLayout(new BorderLayout());
 
         JPanel vehiclePanel = new JPanel(new GridLayout(6, 2));
-        JLabel fuelLabel = new JLabel("Fuel Capacity:");
+        JLabel fuelLabel = new JLabel("Fuel Capacity [kg]:");
         JTextField fuelField = new JTextField();
-        JLabel oxygenLabel = new JLabel("Starting Oxygen:");
+        JLabel oxygenLabel = new JLabel("Initial Oxygen [kg]:");
         JTextField oxygenField = new JTextField();
-        JLabel lengthLabel = new JLabel("Mission Length:");
+        JLabel lengthLabel = new JLabel("Mission Length [days]:");
         JTextField lengthField = new JTextField();
-        JLabel foodLabel = new JLabel("Food Supply:");
+        JLabel foodLabel = new JLabel("Onboard Food Supply [Calories]:");
         JTextField foodField = new JTextField();
-        JLabel crewLabel = new JLabel("Crew Size:");
+        JLabel crewLabel = new JLabel("Crew Size [number of members]:");
         JTextField crewField = new JTextField();
         vehiclePanel.add(fuelLabel); vehiclePanel.add(fuelField);
         vehiclePanel.add(oxygenLabel); vehiclePanel.add(oxygenField);
