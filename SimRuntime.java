@@ -1,4 +1,5 @@
 import java.io.File;
+import java.util.ArrayList;
 
 public class SimRuntime {
 
@@ -8,8 +9,7 @@ public class SimRuntime {
     private Vehicle vehicle;
     private Calculator calculator;
 
-    private static final String fileName = "missionInput.txt";
-
+    // Constructor
     SimRuntime(){
 
         gui = new GUIHandler();
@@ -20,8 +20,27 @@ public class SimRuntime {
 
     }
 
-    public void run(){}
+    // Core operation of program
+    public void run(){
 
-    private void loadFiles(FileHandler fileHandler, Vehicle vehicle){}
+        boolean loadSuccess;
+
+        if(fileHandler.isFileGood()){
+            loadSuccess = loadFiles(fileHandler, vehicle);
+        }else{
+            loadSuccess = false;
+        }
+
+        // The main flow of the program shall be populated after the auxiliary classes are fully determined
+
+    }
+
+    // Initial Population of Vehicle Using Input File
+    private boolean loadFiles(FileHandler fileHandler, Vehicle vehicle){
+
+        // This method shall be populated after the structure of the vehicle class and of the input file is determined
+
+        return true;
+    }
 
 }

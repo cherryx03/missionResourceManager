@@ -8,6 +8,7 @@ public class FileHandler {
     private boolean fileGood;
     private final File inputFile;
 
+    // Constructor
     FileHandler() {
 
         inputFile = new File(fileName);
@@ -25,21 +26,15 @@ public class FileHandler {
 
     }
 
+    // Validity Checks
+    public boolean isFileGood() {
+        return fileGood;
+    }
     private void setFileGood(boolean fileGood){
         this.fileGood = fileGood;
     }
 
-    private boolean createFile(File inputFile){
-
-        boolean success;
-
-        try{success = inputFile.createNewFile();}
-        catch(IOException e){success = false;}
-
-        return success;
-
-    }
-
+    // File Management
     public ArrayList<String> readFile(){
 
         ArrayList<String> fileContents = new ArrayList<>();
@@ -78,6 +73,18 @@ public class FileHandler {
         return true;
     }
 
+    private boolean createFile(File inputFile){
+
+        boolean success;
+
+        try{success = inputFile.createNewFile();}
+        catch(IOException e){success = false;}
+
+        return success;
+
+    }
+
+    // File Name Get/Set
     public static String getFileName() {
         return fileName;
     }
@@ -88,6 +95,8 @@ public class FileHandler {
             return true;
         }else{return false;}
     }
+
+
 
 }
 
