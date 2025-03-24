@@ -8,6 +8,8 @@ public class SimRuntime {
     private Vehicle vehicle;
     private Calculator calculator;
 
+    private static final String fileName = "missionInput.txt";
+
     SimRuntime(){
 
         gui = new GUIHandler();
