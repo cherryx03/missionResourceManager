@@ -16,6 +16,8 @@ public class SimRuntime {
         fileHandler = new FileHandler();
 
         vehicle = new Vehicle();
+        // This is an empty shell; once data is available, a new vehicle is constructed with those values.
+
         calculator = new Calculator();
 
     }
