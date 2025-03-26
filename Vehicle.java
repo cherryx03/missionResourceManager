@@ -6,16 +6,27 @@ public class Vehicle {
     private VehicleResources vehicleRes;
     public ArrayList<CrewMember> vehicleCrew;
 
-    public Vehicle(){
+    Vehicle(){
         this.crewSize = 0;
         this.vehicleCrew = new ArrayList<>();
         this.vehicleRes = new VehicleResources(0, 0, 0, 0);
     }
 
-    public Vehicle(int crewSize, double initialFood, double initialFuel, double initialOx, double initialWater) {
-        this.crewSize = crewSize;
+    Vehicle(int crewSize, double missionLength, double initialFood, double initialFuel, double initialOx, double initialWater) {
+        setCrewSize(crewSize);
+        setMissionLength(missionLength);
         this.vehicleCrew = new ArrayList<>();
         this.vehicleRes = new VehicleResources(initialFood, initialFuel, initialOx, initialWater);
+    }
+
+    public boolean addCrewMember(CrewMember crewMember){
+        return vehicleCrew.add(crewMember);
+    }
+    public boolean removeCrewMemberByObject(CrewMember crewMember){
+        return vehicleCrew.remove(crewMember);
+    }
+    public CrewMember removeCrewMemberByIndex(int memberPos){
+        return vehicleCrew.remove(memberPos);
     }
 
     public int getCrewSize() {
@@ -26,8 +37,18 @@ public class Vehicle {
         this.crewSize = crewSize;
     }
 
+    public double getMissionLength() {return missionLength;}
+
+    private void setMissionLength(double missionLength) {
+        this.missionLength = missionLength;
+    }
+
     public double getFood() {
         return vehicleRes.getFoodSup();
+    }
+
+    public double getFuel() {
+        return vehicleRes.getFuelSup();
     }
 
     public double getWater() {
@@ -38,15 +59,44 @@ public class Vehicle {
         return vehicleRes.getOxSup();
     }
 
-    public void setFood(int food) {
+    public void setFood(double food) {
         vehicleRes.setFoodSup(food);
     }
 
-    public void setWater(int water) {
+    public void setFuel(double fuel) {
+        vehicleRes.setFuelSup(fuel);
+    }
+
+    public void setWater(double water) {
         vehicleRes.setWaterSup(water);
     }
 
-    public void setOx(int ox) {
+    public void setOx(double ox) {
         vehicleRes.setOxSup(ox);
     }
+
+    public String toString(){
+
+        String returnString =
+                    "Crew Size : " + getCrewSize() + "," +
+                    "Mission Length : " + getMissionLength() + "," +
+                    "Food Supply : " + getFood() + "," +
+                    "Fuel Supply : " + getFuel() + "," +
+                    "Oxygen Supply : " + getOx() + "," +
+                    "Water Supply : " + getWater();
+
+        int memberCount=1;
+        for(CrewMember member:vehicleCrew){
+            returnString += "," +
+                    "Member " + memberCount + " Name : " + member.getName() + "," +
+                    "Member " + memberCount + " Age : " + member.getAge() + "," +
+                    "Member " + memberCount + " Sex : " + member.getSex() + "," +
+                    "Member " + memberCount + " Height : " + member.getHeight() + "," +
+                    "Member " + memberCount + " Weight : " + member.getWeight();
+            memberCount++;
+        }
+
+        return returnString;
+    }
+
 }

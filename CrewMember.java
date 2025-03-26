@@ -54,7 +54,20 @@ public class CrewMember {
     }
 
     public boolean setSex(String sex) {
-        if (sex != null && (sex.equalsIgnoreCase("Male") || sex.equalsIgnoreCase("Female"))) {
+        if (
+                sex != null
+                        &&
+                (
+                sex.equalsIgnoreCase("Male")
+                        ||
+                sex.equalsIgnoreCase("M")
+                        ||
+                sex.equalsIgnoreCase("Female")
+                        ||
+                sex.equalsIgnoreCase("F")
+                )
+            )
+        {
             this.sex = sex;
             return true;
         }
@@ -63,7 +76,7 @@ public class CrewMember {
     }
 
     public boolean setHeight(double height) {
-        if (height > 60 && height < 84) {
+        if (height > 100 && height < 250) {
             this.height = height;
             return true;
         }
@@ -72,7 +85,7 @@ public class CrewMember {
     }
 
     public boolean setWeight(double weight) {
-        if (weight > 100 && weight < 250) {
+        if (weight > 50 && weight < 120) {
             this.weight = weight;
             return true;
         }
