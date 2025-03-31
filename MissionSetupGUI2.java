@@ -21,14 +21,15 @@ class CrewMember {
     double weight;
     double age;
     double height;
-    String gender;
+    String Sex;
 
-    public CrewMember(String name, double weight, double age, double height, String gender) {
+    public CrewMember(String name, double weight, double age, double height, String Sex) {
         this.name = name;
         this.weight = weight;
         this.age = age;
         this.height = height;
-        this.gender = gender;
+        this.Sex = Sex;
+        // TODO: create seperate variables for consumption of each resource based on crewmember details 
     }
 
     @Override
@@ -38,12 +39,12 @@ class CrewMember {
                 ", weight=" + weight +
                 ", age=" + age +
                 ", height=" + height +
-                ", gender='" + gender + '\'' +
+                ", Sex='" + Sex + '\'' +
                 '}';
     }
 }
 
-public class MissionSetupGUIProto {
+public class MissionSetupGUI2 {
     public static void main(String[] args) {
         JFrame frame = new JFrame("Mission Setup");
         frame.setSize(1200, 800);
@@ -107,14 +108,13 @@ public class MissionSetupGUIProto {
                         JTextField heightField = new JTextField();
                         JLabel weightLabel = new JLabel("Weight [kg]:");
                         JTextField weightField = new JTextField();
-                        JLabel genderLabel = new JLabel("Gender [M/F/N/A]:");
-                        JTextField genderField = new JTextField();
-
+                        JLabel sexLabel = new JLabel("Sex [M, F, N/A]:");
+                        JTextField sexField = new JTextField();
                         memberPanel.add(nameLabel); memberPanel.add(nameField);
                         memberPanel.add(ageLabel); memberPanel.add(ageField);
                         memberPanel.add(heightLabel); memberPanel.add(heightField);
                         memberPanel.add(weightLabel); memberPanel.add(weightField);
-                        memberPanel.add(genderLabel); memberPanel.add(genderField);
+                        memberPanel.add(sexLabel); memberPanel.add(sexField);
 
                         crewPanel.add(memberPanel);
                     }
@@ -132,7 +132,7 @@ public class MissionSetupGUIProto {
                     rightPanel.removeAll();
                     rightPanel.add(createChartPanel("Food Supply", "Calories", missionLength, initialFood, 3035 * crewSize, Color.GREEN));
                     rightPanel.add(createChartPanel("Water Supply", "Liters", missionLength, initialWaterSupply, 2.6 * crewSize, Color.BLUE));
-                    rightPanel.add(createChartPanel("Oxygen Supply", "kg", missionLength, initialOxygenSupply, 7.581 * crewSize, Color.PINK));
+                    rightPanel.add(createChartPanel("Oxygen Supply", "kg", missionLength, initialOxygenSupply, 7.581 * crewSize, Color.BLACK));
                     rightPanel.add(createChartPanel("Fuel Supply", "kg", missionLength, initialFuelSupply, 19, Color.RED));
 
                     frame.revalidate();
