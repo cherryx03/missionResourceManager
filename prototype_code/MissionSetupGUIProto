@@ -43,7 +43,7 @@ class CrewMember {
     }
 }
 
-public class MissionSetupDemo {
+public class MissionSetupGUIProto {
     public static void main(String[] args) {
         JFrame frame = new JFrame("Mission Setup");
         frame.setSize(1200, 800);
@@ -132,7 +132,7 @@ public class MissionSetupDemo {
                     rightPanel.removeAll();
                     rightPanel.add(createChartPanel("Food Supply", "Calories", missionLength, initialFood, 3035 * crewSize, Color.GREEN));
                     rightPanel.add(createChartPanel("Water Supply", "Liters", missionLength, initialWaterSupply, 2.6 * crewSize, Color.BLUE));
-                    rightPanel.add(createChartPanel("Oxygen Supply", "kg", missionLength, initialOxygenSupply, 7.581 * crewSize, Color.BLACK));
+                    rightPanel.add(createChartPanel("Oxygen Supply", "kg", missionLength, initialOxygenSupply, 7.581 * crewSize, Color.PINK));
                     rightPanel.add(createChartPanel("Fuel Supply", "kg", missionLength, initialFuelSupply, 19, Color.RED));
 
                     frame.revalidate();
