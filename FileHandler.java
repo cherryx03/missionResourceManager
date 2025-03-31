@@ -4,6 +4,7 @@ import java.util.Scanner;
 
 public class FileHandler {
 
+//    private static String fileName = "simInputValid.txt";
     private static String fileName = "simInputInvalid.txt";
     private boolean fileGood;
     private final File inputFile;
