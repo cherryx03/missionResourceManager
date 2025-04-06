@@ -1,6 +1,4 @@
 
-import java.io.File;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class SimRuntime {
@@ -14,10 +12,12 @@ public class SimRuntime {
     // Constructor
     SimRuntime(){
 
-        gui = new GUIHandler();
+        vehicle = new Vehicle();
+
+        gui = new GUIHandler(vehicle);
         fileHandler = new FileHandler();
 
-        vehicle = new Vehicle();
+
         // This is an empty shell; once data is available, a new vehicle is constructed with those values.
 
         calculator = new Calculator();

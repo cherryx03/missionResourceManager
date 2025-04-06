@@ -2,8 +2,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
-import java.util.Random;
+
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
@@ -108,7 +107,7 @@ public class MissionSetupGUI2 {
                         JTextField heightField = new JTextField();
                         JLabel weightLabel = new JLabel("Weight [kg]:");
                         JTextField weightField = new JTextField();
-                        JLabel sexLabel = new JLabel("Sex [M, F, N/A]:");
+                        JLabel sexLabel = new JLabel("Sex [M, F]:");
                         JTextField sexField = new JTextField();
                         memberPanel.add(nameLabel); memberPanel.add(nameField);
                         memberPanel.add(ageLabel); memberPanel.add(ageField);

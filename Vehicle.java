@@ -4,7 +4,7 @@ public class Vehicle {
     private int crewSize;
     private double missionLength;
     private VehicleResources vehicleRes;
-    public ArrayList<CrewMember> vehicleCrew;
+    private ArrayList<CrewMember> vehicleCrew;
 
     Vehicle(){
         this.crewSize = 0;
