@@ -132,18 +132,6 @@ public class GUIHandler {
 
     }
 
-    private ChartPanel createChartPanel(String title, String yAxis, int missionLength, double initialSupply, double dailyConsumption, Color color) {
-        DefaultCategoryDataset dataset = new DefaultCategoryDataset();
-        double supply = initialSupply;
-        for (int j = 0; j <= missionLength; j++) {
-            dataset.addValue(supply, title, Integer.toString(j));
-            supply -= dailyConsumption;
-        }
-        JFreeChart chart = ChartFactory.createLineChart(title, "Time [days]", yAxis, dataset);
-        chart.getCategoryPlot().getRenderer().setSeriesPaint(0, color);
-        return new ChartPanel(chart);
-    }
-
     private void leftPanelSetup(JFrame frame){
         leftPanel = new JPanel();
         leftPanel.setLayout(new BorderLayout());
@@ -166,6 +154,49 @@ public class GUIHandler {
         submitButton.addActionListener(new ActionHandler(vehicle, this));
         //TODO: FIGURE OUT WHATS UP W THE GUI LISTENERS
         frame.add(submitButton);
+    }
+
+    public void takeInputs(Vehicle vehicle){
+
+        vehicle.setMissionLength(Double.parseDouble(lengthField.getText()));
+        vehicle.setCrewSize(Integer.parseInt(crewField.getText()));
+        vehicle.setFood(Double.parseDouble(foodField.getText()));
+        vehicle.setWater(Double.parseDouble(waterField.getText()));
+        vehicle.setOx(Double.parseDouble(oxygenField.getText()));
+        vehicle.setFuel(Double.parseDouble(fuelField.getText()));
+
+        rightPanelCharts(vehicle);
+    }
+
+    private void rightPanelCharts(Vehicle vehicle){
+
+        double missionLength = vehicle.getMissionLength();
+        int crewSize = vehicle.getCrewSize();
+        double initialFood = vehicle.getFood();
+        double initialWaterSupply = vehicle.getWater();
+        double initialOxygenSupply = vehicle.getOx();
+        double initialFuelSupply = vehicle.getFuel();
+
+        rightPanel.removeAll();
+        rightPanel.add(createChartPanel("Food Supply", "Calories", missionLength, initialFood, 3035 * crewSize, Color.GREEN));
+        rightPanel.add(createChartPanel("Water Supply", "Liters", missionLength, initialWaterSupply, 2.6 * crewSize, Color.BLUE));
+        rightPanel.add(createChartPanel("Oxygen Supply", "kg", missionLength, initialOxygenSupply, 7.581 * crewSize, Color.BLACK));
+        rightPanel.add(createChartPanel("Fuel Supply", "kg", missionLength, initialFuelSupply, 19, Color.RED));
+
+        frame.revalidate();
+        frame.repaint();
+    }
+
+    private ChartPanel createChartPanel(String title, String yAxis, double missionLength, double initialSupply, double dailyConsumption, Color color) {
+        DefaultCategoryDataset dataset = new DefaultCategoryDataset();
+        double supply = initialSupply;
+        for (int j = 0; j <= missionLength; j++) {
+            dataset.addValue(supply, title, Integer.toString(j));
+            supply -= dailyConsumption;
+        }
+        JFreeChart chart = ChartFactory.createLineChart(title, "Time [days]", yAxis, dataset);
+        chart.getCategoryPlot().getRenderer().setSeriesPaint(0, color);
+        return new ChartPanel(chart);
     }
 
     public void addLabels(JPanel panel, JLabel[] labels){

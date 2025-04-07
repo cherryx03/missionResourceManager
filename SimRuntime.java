@@ -85,9 +85,11 @@ public class SimRuntime {
             );
 
             // Add all crew members present in file to the new vehicle
+
+            boolean addSuccess;
             for(int i = 6; i<fileContents.size(); i+=5){
 
-                vehicle.addCrewMember(new CrewMember(
+                addSuccess = vehicle.addCrewMember(new CrewMember(
                         fileContents.get(i),
                         Integer.parseInt(fileContents.get(i+1)),
                         fileContents.get(i+2),
@@ -95,6 +97,8 @@ public class SimRuntime {
                         Integer.parseInt(fileContents.get(i+4))
                         )
                 );
+
+                if(!addSuccess){return false;}
 
             }
 

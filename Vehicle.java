@@ -39,7 +39,7 @@ public class Vehicle {
 
     public double getMissionLength() {return missionLength;}
 
-    private void setMissionLength(double missionLength) {
+    public void setMissionLength(double missionLength) {
         this.missionLength = missionLength;
     }
 

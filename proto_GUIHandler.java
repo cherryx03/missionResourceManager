@@ -129,7 +129,7 @@ public class proto_GUIHandler {
             // if it should not close here and should move to the end, do what you think is best
             // but if it breaks, put it back lol
 
-        private static ChartPanel createChartPanel(String title, String yAxis, int missionLength, double initialSupply, double dailyConsumption, Color color) {
+        private static ChartPanel createChartPanel(String title, String yAxis, double missionLength, double initialSupply, double dailyConsumption, Color color) {
             DefaultCategoryDataset dataset = new DefaultCategoryDataset();
             double supply = initialSupply;
             for (int j = 0; j <= missionLength; j++) {

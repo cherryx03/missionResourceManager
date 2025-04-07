@@ -19,7 +19,7 @@ public class ActionHandler implements ActionListener {
             guiHandler.memberPanelSetup(vehicle);
         }
         else{
-            
+            guiHandler.takeInputs(vehicle);
         }
     }
 
