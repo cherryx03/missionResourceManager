@@ -41,10 +41,10 @@ public class GUIHandler {
         // Create GUI elements before making the frame visible
         frame = frameSetup();
         //leftPanelSetup(frame); // Sets up missionPanel immediately
-        submitButtonSetup(vehicle, frame);
+        //submitButtonSetup(vehicle, frame);
 
-        frame.setVisible(true);
-        this.firstSubmit = true;
+//        frame.setVisible(true);
+        //this.firstSubmit = true;
         frame = GUISetup(vehicle);
         frame.setVisible(true);
     }
@@ -72,15 +72,30 @@ public class GUIHandler {
     }
 
     public JPanel missionPanelSetup(JPanel leftPanel){
-        missionPanel = new JPanel(new GridLayout(3, 2));
+        missionPanel = new JPanel(new GridLayout(6, 2));
+//        new JTextField(fuelField, oxygenField, waterField, lengthField, foodField, crewField) = createMissionFields();
+
+        JPanel missionPanel = new JPanel(new GridLayout(7, 2));
+        JLabel fuelLabel = new JLabel("Fuel Capacity [kg]:");
+        JTextField fuelField = new JTextField();
+        JLabel oxygenLabel = new JLabel("Initial Oxygen [kg]:");
+        JTextField oxygenField = new JTextField();
+        JLabel waterLabel = new JLabel("Onboard Water Supply [L]:");
+        JTextField waterField = new JTextField();
+        JLabel lengthLabel = new JLabel("Mission Length [days]:");
+        JTextField lengthField = new JTextField();
+        JLabel foodLabel = new JLabel("Onboard Food Supply [Calories]:");
+        JTextField foodField = new JTextField();
+        JLabel crewLabel = new JLabel("Crew Size [number of members]:");
+        JTextField crewField = new JTextField();
         missionPanel.add(fuelLabel); missionPanel.add(fuelField);
         missionPanel.add(oxygenLabel); missionPanel.add(oxygenField);
         missionPanel.add(waterLabel); missionPanel.add(waterField);
         missionPanel.add(lengthLabel); missionPanel.add(lengthField);
         missionPanel.add(foodLabel); missionPanel.add(foodField);
         missionPanel.add(crewLabel); missionPanel.add(crewField);
-        //addFields(missionPanel, createMissionFields());
-        //addLabels(missionPanel, createMissionLabels());
+//        addFields(missionPanel, createMissionFields());
+//        addLabels(missionPanel, createMissionLabels());
         //leftPanel.add(missionPanel);
         return missionPanel;
     }
@@ -91,26 +106,51 @@ public class GUIHandler {
         return new JScrollPane(crewPanel);
     }
 
-    public void memberPanelSetup(Vehicle vehicle){
-        if(isFirstSubmit()){
-            crewPanel.removeAll();
+    public JPanel memberPanelSetup(Vehicle vehicle){
+        //if(isFirstSubmit()){
+//            crewPanel.removeAll();
             int crewSize = Integer.parseInt(crewField.getText());
             vehicle.setCrewSize(crewSize);
 
-            for(int i=0; i<crewSize; i++) {
+//            for(int i=0; i<crewSize; i++) {
+//                JPanel memberPanel = new JPanel();
+//                memberPanel.setLayout(new GridLayout(6, 2));
+//                memberPanel.setBorder(BorderFactory.createTitledBorder("Crewmember " + (i + 1)));
+//                addLabels(memberPanel, createMemberLabels());
+//                addFields(memberPanel, createMemberFields());
+//                crewPanel.add(memberPanel);
+//            }
+
+            for (int i = 0; i < crewSize; i++) {
                 JPanel memberPanel = new JPanel();
                 memberPanel.setLayout(new GridLayout(6, 2));
                 memberPanel.setBorder(BorderFactory.createTitledBorder("Crewmember " + (i + 1)));
-                addLabels(memberPanel, createMemberLabels());
-                addFields(memberPanel, createMemberFields());
+
+                JLabel nameLabel = new JLabel("Name:");
+                JTextField nameField = new JTextField();
+                JLabel ageLabel = new JLabel("Age [years]:");
+                JTextField ageField = new JTextField();
+                JLabel heightLabel = new JLabel("Height [cm]:");
+                JTextField heightField = new JTextField();
+                JLabel weightLabel = new JLabel("Weight [kg]:");
+                JTextField weightField = new JTextField();
+                JLabel sexLabel = new JLabel("Sex [M, F, N/A]:");
+                JTextField sexField = new JTextField();
+                memberPanel.add(nameLabel); memberPanel.add(nameField);
+                memberPanel.add(ageLabel); memberPanel.add(ageField);
+                memberPanel.add(heightLabel); memberPanel.add(heightField);
+                memberPanel.add(weightLabel); memberPanel.add(weightField);
+                memberPanel.add(sexLabel); memberPanel.add(sexField);
+
                 crewPanel.add(memberPanel);
             }
 
             setFirstSubmit(false);
-            frame.revalidate();
-            frame.repaint();
+            return crewPanel;
+            //frame.revalidate();
+            //frame.repaint();
         }
-    }
+
 
 
 private JPanel leftPanelSetup(JFrame frame){
@@ -137,23 +177,25 @@ private JButton submitButtonSetup(Vehicle vehicle, JFrame frame){
         @Override
         public void actionPerformed(ActionEvent e) {
             if (!secondSubmit) {
-                int crewSize = Integer.parseInt(crewField.getText());
-                crewPanel.removeAll();
-                for (int i = 0; i < crewSize; i++) {
+                //int crewSize = Integer.parseInt(crewField.getText());
+                //crewPanel.removeAll();
+                //for (int i = 0; i < crewSize; i++) {
+                JPanel crewPanel = memberPanelSetup(vehicle);
+                    //crewPanel.add(memberPanel);
+                //}
+                frame.add(crewPanel);
 
-                    memberPanelSetup(vehicle);
-                }
-                secondSubmit = true;
-                frame.revalidate();
-                frame.repaint();
+//                secondSubmit = true;
+//                frame.revalidate();
+//                frame.repaint();
             } else {
                 //TODO: take all inputs
                 // call calculator
                 // create charts
-
-                frame.revalidate();
-                frame.repaint();
+            frame.revalidate();
             }
+            frame.revalidate();
+            frame.repaint();
         }
     });
 return submitButton;
