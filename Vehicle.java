@@ -4,7 +4,7 @@ public class Vehicle {
     private int crewSize;
     private double missionLength;
     private VehicleResources vehicleRes;
-    public ArrayList<CrewMember> vehicleCrew;
+    private ArrayList<CrewMember> vehicleCrew;
 
     Vehicle(){
         this.crewSize = 0;
@@ -29,6 +29,12 @@ public class Vehicle {
         return vehicleCrew.remove(memberPos);
     }
 
+    // getCrewMembers added by cw
+    public ArrayList<CrewMember> getCrewMembers() {
+        return vehicleCrew;
+    }
+
+
     public int getCrewSize() {
         return crewSize;
     }
@@ -39,7 +45,7 @@ public class Vehicle {
 
     public double getMissionLength() {return missionLength;}
 
-    private void setMissionLength(double missionLength) {
+    public void setMissionLength(double missionLength) {
         this.missionLength = missionLength;
     }
 
