@@ -33,7 +33,7 @@ public class GUIHandler {
     private JLabel foodLabel;
     private JLabel crewLabel;
 
-    public GUIHandler(Vehicle vehicle){
+    GUIHandler(Vehicle vehicle){
         this.firstSubmit = true;
 
         // Create GUI elements before making the frame visible
@@ -47,7 +47,7 @@ public class GUIHandler {
         frame.setVisible(true);
     }
 
-    public JFrame frameSetup(){
+    private JFrame frameSetup(){
         JFrame frame = new JFrame("Mission Setup");
         frame.setSize(1200, 800);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -55,12 +55,12 @@ public class GUIHandler {
         return frame;
     }
 
-    public JFrame GUISetup(Vehicle vehicle){
+    private JFrame GUISetup(Vehicle vehicle){
         JFrame frame = frameSetup();
-        JPanel leftPanel = leftPanelSetup(frame);
+        JPanel leftPanel = leftPanelSetup();
 //        JPanel missionPanel = missionPanelSetup(leftPanel);
 //        leftPanel.add(missionPanel);
-        JPanel rightPanel = rightPanelSetup(frame);
+        JPanel rightPanel = rightPanelSetup();
         //submitButtonSetup(vehicle, frame);
         JButton submitButton = submitButtonSetup(vehicle, frame);
         frame.add(leftPanel, BorderLayout.WEST);
@@ -69,7 +69,7 @@ public class GUIHandler {
         return frame;
     }
 
-    private JPanel leftPanelSetup(JFrame frame){
+    private JPanel leftPanelSetup(){
         leftPanel = new JPanel();
         leftPanel.setLayout(new BorderLayout());
         leftPanel.setPreferredSize(new Dimension(480, 800));
@@ -78,37 +78,25 @@ public class GUIHandler {
         return leftPanel;
     }
 
-    public JPanel missionPanelSetup(JPanel leftPanel){
+    private JPanel missionPanelSetup(JPanel leftPanel){
+
         missionPanel = new JPanel(new GridLayout(6, 2));
 //        new JTextField(fuelField, oxygenField, waterField, lengthField, foodField, crewField) = createMissionFields();
 
         missionPanel = new JPanel(new GridLayout(7, 2));
-        fuelLabel = new JLabel("Fuel Capacity [kg]:");
-        fuelField = new JTextField();
-        oxygenLabel = new JLabel("Initial Oxygen [kg]:");
-        oxygenField = new JTextField();
-        waterLabel = new JLabel("Onboard Water Supply [L]:");
-        waterField = new JTextField();
-        lengthLabel = new JLabel("Mission Length [days]:");
-        lengthField = new JTextField();
-        foodLabel = new JLabel("Onboard Food Supply [Calories]:");
-        foodField = new JTextField();
-        crewLabel = new JLabel("Crew Size [number of members]:");
-        crewField = new JTextField();
 
-        missionPanel.add(fuelLabel); missionPanel.add(fuelField);
-        missionPanel.add(oxygenLabel); missionPanel.add(oxygenField);
-        missionPanel.add(waterLabel); missionPanel.add(waterField);
-        missionPanel.add(lengthLabel); missionPanel.add(lengthField);
-        missionPanel.add(foodLabel); missionPanel.add(foodField);
-        missionPanel.add(crewLabel); missionPanel.add(crewField);
-//        addFields(missionPanel, createMissionFields());
-//        addLabels(missionPanel, createMissionLabels());
-        //leftPanel.add(missionPanel);
+        JTextField[] missionFields = createMissionFields();
+        JLabel[] missionLabels = createMissionLabels();
+
+
+        addLabelsWithFields(missionPanel, missionLabels, missionFields);
+
+        leftPanel.add(missionPanel);
+
         return missionPanel;
     }
 
-    private JPanel rightPanelSetup(JFrame frame){
+    private JPanel rightPanelSetup(){
         rightPanel = new JPanel(new GridLayout(2, 2));
         rightPanel.setPreferredSize(new Dimension(720, 800));
         return rightPanel;
@@ -147,7 +135,7 @@ public class GUIHandler {
         return submitButton;
     }
 
-    public JPanel memberPanelSetup(Vehicle vehicle){
+    private JPanel memberPanelSetup(Vehicle vehicle){
 //        if(isFirstSubmit()){
 //            crewPanel.removeAll();
         int crewSize = Integer.parseInt(crewField.getText());
@@ -167,26 +155,14 @@ public class GUIHandler {
             memberPanel.setLayout(new GridLayout(6, 2));
             memberPanel.setBorder(BorderFactory.createTitledBorder("Crewmember " + (i + 1)));
 
-            JLabel nameLabel = new JLabel("Name:");
-            JTextField nameField = new JTextField();
-            JLabel ageLabel = new JLabel("Age [years]:");
-            JTextField ageField = new JTextField();
-            JLabel heightLabel = new JLabel("Height [cm]:");
-            JTextField heightField = new JTextField();
-            JLabel weightLabel = new JLabel("Weight [kg]:");
-            JTextField weightField = new JTextField();
-            JLabel sexLabel = new JLabel("Sex [M, F, N/A]:");
-            JTextField sexField = new JTextField();
-            memberPanel.add(nameLabel); memberPanel.add(nameField);
-            memberPanel.add(ageLabel); memberPanel.add(ageField);
-            memberPanel.add(heightLabel); memberPanel.add(heightField);
-            memberPanel.add(weightLabel); memberPanel.add(weightField);
-            memberPanel.add(sexLabel); memberPanel.add(sexField);
+            JLabel[] memberLabels = createMemberLabels();
+            JTextField[] memberFields = createMemberFields();
+
+            addLabelsWithFields(memberPanel, memberLabels, memberFields);
 
             crewPanel.add(memberPanel);
         }
 
-        setFirstSubmit(false);
         return crewPanel;
         //frame.revalidate();
         //frame.repaint();
@@ -198,7 +174,7 @@ public class GUIHandler {
         return new JScrollPane(crewPanel);
     }
 
-    public void takeFirstInputs(Vehicle vehicle, Calculator calculator) {
+    private void takeFirstInputs(Vehicle vehicle, Calculator calculator) {
         // Parse mission-level inputs
         vehicle.setMissionLength(Double.parseDouble(lengthField.getText()));
         vehicle.setCrewSize(Integer.parseInt(crewField.getText()));
@@ -213,7 +189,7 @@ public class GUIHandler {
         memberPanelSetup(vehicle);
     }
 
-    public void takeAllInputs(Vehicle vehicle, Calculator calculator){
+    private void takeAllInputs(Vehicle vehicle, Calculator calculator){
         // Populate crew members from input panels
         for (Component comp : crewPanel.getComponents()) {
             if (comp instanceof JPanel) {
@@ -268,15 +244,11 @@ public class GUIHandler {
         return new ChartPanel(chart);
     }
 
-    public void addLabels(JPanel panel, JLabel[] labels){
-        for(JLabel label : labels) {
-            panel.add(label);
-        }
-    }
+    private void addLabelsWithFields(JPanel panel, JLabel[] labels, JTextField[] fields){
 
-    public void addFields(JPanel panel, JTextField[] fields){
-        for(JTextField field : fields){
-            panel.add(field);
+        for(int i = 0; i<labels.length; i++) {
+            panel.add(labels[i]);
+            panel.add(fields[i]);
         }
     }
 
@@ -322,11 +294,12 @@ public class GUIHandler {
         return new JTextField[]{fuelField, oxygenField, waterField, lengthField, foodField, crewField};
     }
 
-    public boolean isFirstSubmit() {
-        return firstSubmit;
-    }
-    public void setFirstSubmit(boolean firstSubmit) {
-        this.firstSubmit = firstSubmit;
-    }
+//    private boolean isFirstSubmit() {
+//        return firstSubmit;
+//    }
+//    private void setFirstSubmit(boolean firstSubmit) {
+//        this.firstSubmit = firstSubmit;
+//    }
+
 }
  // end class
