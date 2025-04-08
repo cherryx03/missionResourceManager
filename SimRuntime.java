@@ -4,7 +4,7 @@ import java.util.ArrayList;
 public class SimRuntime {
 
     private GUIHandler gui;
-    //private FileHandler fileHandler;
+    private FileHandler fileHandler;
 
     private Vehicle vehicle;
     private Calculator calculator;
@@ -15,8 +15,8 @@ public class SimRuntime {
         vehicle = new Vehicle();
 
         calculator = new Calculator();
-        gui = new GUIHandler(vehicle, calculator);
-        //fileHandler = new FileHandler();
+        gui = new GUIHandler(vehicle);
+        fileHandler = new FileHandler();
 
 //        gui.GUISetup(vehicle);
 //        gui.missionPanelSetup();
