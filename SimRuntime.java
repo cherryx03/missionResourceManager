@@ -76,18 +76,15 @@ public class SimRuntime {
 
         try{
 
-            // Construct a new vehicle with file information
-            vehicle = new Vehicle(
-                    Integer.parseInt(fileContents.get(0)),      // Crew Size
-                    Double.parseDouble(fileContents.get(1)),    // Mission Length
-                    Double.parseDouble(fileContents.get(2)),    // Initial Food
-                    Double.parseDouble(fileContents.get(3)),    // Initial Fuel
-                    Double.parseDouble(fileContents.get(4)),    // Initial Ox
-                    Double.parseDouble(fileContents.get(5))    // Initial Water
-            );
+            // Add file information to vehicle
+            vehicle.setCrewSize(Integer.parseInt(fileContents.get(0)));          // Crew Size
+            vehicle.setMissionLength(Double.parseDouble(fileContents.get(1)));   // Mission Length
+            vehicle.setFood(Double.parseDouble(fileContents.get(2)));            // Initial Food
+            vehicle.setFuel(Double.parseDouble(fileContents.get(3)));            // Initial Fuel
+            vehicle.setOx(Double.parseDouble(fileContents.get(4)));              // Initial Ox
+            vehicle.setWater(Double.parseDouble(fileContents.get(5)));           // Initial Water
 
             // Add all crew members present in file to the new vehicle
-
             boolean addSuccess;
             for(int i = 6; i<fileContents.size(); i+=5){
 
@@ -101,7 +98,6 @@ public class SimRuntime {
                 );
 
                 if(!addSuccess){return false;}
-
             }
 
             // Print contents for demo
@@ -111,8 +107,8 @@ public class SimRuntime {
             }
 
         }catch(NumberFormatException e){
-            vehicle = new Vehicle();
             System.out.println("---Invalid File Contents---");
+            return false;
         }
 
         return true;
