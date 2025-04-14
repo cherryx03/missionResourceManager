@@ -2,7 +2,7 @@ import java.util.List;
 
 public class Calculator {
 
-    public Calculator() {}
+    Calculator() {}
 
     public double[] getSupplyLevels(double missionLength, double initialSupply, double dailyConsumption) {
         int days = (int) Math.ceil(missionLength);

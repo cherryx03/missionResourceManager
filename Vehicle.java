@@ -34,20 +34,11 @@ public class Vehicle {
         return vehicleCrew;
     }
 
-
     public int getCrewSize() {
         return crewSize;
     }
 
-    public void setCrewSize(int crewSize) {
-        this.crewSize = crewSize;
-    }
-
     public double getMissionLength() {return missionLength;}
-
-    public void setMissionLength(double missionLength) {
-        this.missionLength = missionLength;
-    }
 
     public double getFood() {
         return vehicleRes.getFoodSup();
@@ -63,6 +54,14 @@ public class Vehicle {
 
     public double getOx() {
         return vehicleRes.getOxSup();
+    }
+
+    public void setCrewSize(int crewSize) {
+        this.crewSize = crewSize;
+    }
+
+    public void setMissionLength(double missionLength) {
+        this.missionLength = missionLength;
     }
 
     public void setFood(double food) {
