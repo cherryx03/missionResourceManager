@@ -59,17 +59,19 @@ public class SimRuntime {
         // 2. double missionLength  [days]
 
         // Second: Resources
-        // 3. double initialFood    [kcal]
-        // 4. double initialFuel    [kg]
-        // 5. double initialOx      [kg]
-        // 6. double initialWater   [kg]
+        // 3. double initialFood         [kcal]
+        // 4. double initialFuel         [kg]
+        // 5. double initialOx           [kg]
+        // 6. double initialWater        [kg]
+        // 7. double oxReclaimRate       [%]
+        // 8. double WaterReclaimRate    [%]
 
         // Third: Crew Members
-        // 7. String memberName
-        // 8. int memberAge         [n]
-        // 9. String memberSex
-        // 10. double memberHeight  [cm]
-        // 11. double memberWeight  [kg]
+        // 9. String memberName
+        // 10. int memberAge         [n]
+        // 11. String memberSex
+        // 11. double memberHeight  [cm]
+        // 12. double memberWeight  [kg]
         // Repeat Crew Members
 
         ArrayList<String> fileContents = fileHandler.readFile();
@@ -77,23 +79,26 @@ public class SimRuntime {
         try{
 
             // Add file information to vehicle
-            vehicle.setCrewSize(Integer.parseInt(fileContents.get(0)));          // Crew Size
-            vehicle.setMissionLength(Double.parseDouble(fileContents.get(1)));   // Mission Length
-            vehicle.setFood(Double.parseDouble(fileContents.get(2)));            // Initial Food
-            vehicle.setFuel(Double.parseDouble(fileContents.get(3)));            // Initial Fuel
-            vehicle.setOx(Double.parseDouble(fileContents.get(4)));              // Initial Ox
-            vehicle.setWater(Double.parseDouble(fileContents.get(5)));           // Initial Water
+            vehicle.setCrewSize(Integer.parseInt(fileContents.get(0).replace("Crew Size : ","")));          // Crew Size
+            vehicle.setMissionLength(Double.parseDouble(fileContents.get(1).replace("Mission Length : ","")));   // Mission Length
+            vehicle.setFood(Double.parseDouble(fileContents.get(2).replace("Food Supply : ","")));            // Initial Food
+            vehicle.setFuel(Double.parseDouble(fileContents.get(3).replace("Fuel Supply : ","")));            // Initial Fuel
+            vehicle.setOx(Double.parseDouble(fileContents.get(4).replace("Oxygen Supply : ","")));              // Initial Ox
+            vehicle.setWater(Double.parseDouble(fileContents.get(5).replace("Water Supply : ","")));           // Initial Water
+            vehicle.vehicleRes.setOxReclaimRate(Double.parseDouble(fileContents.get(6).replace("Oxygen Reclamation Rate : ",""))); // Ox Reclaim Rate
+            vehicle.vehicleRes.setWaterReclaimRate(Double.parseDouble(fileContents.get(7).replace("Water Reclamation Rate : ",""))); // Water Reclaim Rate
 
             // Add all crew members present in file to the new vehicle
             boolean addSuccess;
+            String memberTag;
             for(int i = 6; i<fileContents.size(); i+=5){
-
+                memberTag = "Member "+ i;
                 addSuccess = vehicle.addCrewMember(new CrewMember(
-                        fileContents.get(i),
-                        Integer.parseInt(fileContents.get(i+1)),
-                        fileContents.get(i+2),
-                        Integer.parseInt(fileContents.get(i+3)),
-                        Integer.parseInt(fileContents.get(i+4))
+                        fileContents.get(i).replace(memberTag+" Name : ",""),
+                        Integer.parseInt(fileContents.get(i+1).replace(memberTag+" Age : ","")),
+                        fileContents.get(i+2).replace(memberTag+" Sex : ",""),
+                        Integer.parseInt(fileContents.get(i+3).replace(memberTag+" Height : ","")),
+                        Integer.parseInt(fileContents.get(i+4).replace(memberTag+" Weight : ",""))
                         )
                 );
 
@@ -113,5 +118,14 @@ public class SimRuntime {
 
         return true;
     }
+
+    private boolean saveFile(FileHandler fileHandler, Vehicle vehicle){
+
+        String[] fileContents = vehicle.toString().split("\n");
+
+        boolean success = fileHandler.writeFile(fileContents);
+
+        return success;
+    };
 
 }

@@ -222,13 +222,13 @@ public class GUIHandler {
 
         rightPanel.removeAll();
         rightPanel.add(createChartPanel("Food Supply", "Calories",
-                calculator.getCrewBasedSupplyLevels(missionLength, vehicle.getFood(), crew, "food"), Color.GREEN));
+                calculator.getCrewBasedSupplyLevels(missionLength, vehicle.vehicleRes.getFoodSup(), crew, "food"), Color.GREEN));
         rightPanel.add(createChartPanel("Water Supply", "Liters",
-                calculator.getCrewBasedSupplyLevels(missionLength, vehicle.getWater(), crew, "water"), Color.BLUE));
+                calculator.getCrewBasedSupplyLevels(missionLength, vehicle.vehicleRes.getWaterSupply(), crew, "water"), Color.BLUE));
         rightPanel.add(createChartPanel("Oxygen Supply", "kg",
-                calculator.getCrewBasedSupplyLevels(missionLength, vehicle.getOx(), crew, "oxygen"), Color.BLACK));
+                calculator.getCrewBasedSupplyLevels(missionLength, vehicle.vehicleRes.getOxSup(), crew, "oxygen"), Color.BLACK));
         rightPanel.add(createChartPanel("Fuel Supply", "kg",
-                calculator.getSupplyLevels(missionLength, vehicle.getFuel(), 19), Color.RED));
+                calculator.getSupplyLevels(missionLength, vehicle.vehicleRes.getFuelSup(), vehicle.vehicleRes.getFuelConsumeRate()), Color.RED));
 
         frame.revalidate();
         frame.repaint();

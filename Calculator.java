@@ -55,4 +55,5 @@ public class Calculator {
         double dailyConsumption = getTotalDailyConsumption(crew, type);
         return getSupplyLevels(missionLength, initialSupply, dailyConsumption);
     }
+
 } // end class

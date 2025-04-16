@@ -57,7 +57,7 @@ public class FileHandler {
         return fileContents;
     }
 
-    public boolean writeFile(ArrayList<String> fileContents){
+    public boolean writeFile(String[] fileContents){
 
         if(fileGood) {
 
