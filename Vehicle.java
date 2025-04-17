@@ -50,11 +50,11 @@ public class Vehicle {
     }
 
     public void setFood(double food) {
-        vehicleRes.setFoodSup(food);
+        vehicleRes.setFoodSupply(food);
     }
 
     public void setFuel(double fuel) {
-        vehicleRes.setFuelSup(fuel);
+        vehicleRes.setFuelSupply(fuel);
     }
 
     public void setWater(double water) {
@@ -62,7 +62,7 @@ public class Vehicle {
     }
 
     public void setOx(double ox) {
-        vehicleRes.setOxSup(ox);
+        vehicleRes.setOxSupply(ox);
     }
 
     public String toString(){

@@ -22,15 +22,15 @@ public class VehicleResources {
         this.waterReclaimRate = waterReclaimRate;
     }
 
-    public double getFoodSup() {
+    public double getFoodSupply() {
         return foodSupply;
     }
 
-    public double getFuelSup() {
+    public double getFuelSupply() {
         return fuelSupply;
     }
 
-    public double getOxSup() {
+    public double getOxSupply() {
         return oxSupply;
     }
     
@@ -62,19 +62,19 @@ public class VehicleResources {
         return waterConsumeRate;
     }
 
-    public void setFoodSup(double foodSupply) {
+    public void setFoodSupply(double foodSupply) {
         if (foodSupply > 0) {
             this.foodSupply = foodSupply;
         }
     }
 
-    public void setFuelSup(double fuelSupply) {
+    public void setFuelSupply(double fuelSupply) {
         if (fuelSupply > 0) {
             this.fuelSupply = fuelSupply;
         }
     }
 
-    public void setOxSup(double oxSupply) {
+    public void setOxSupply(double oxSupply) {
         if (oxSupply > 0) {
             this.oxSupply = oxSupply;
         }
@@ -124,9 +124,9 @@ public class VehicleResources {
 
     @Override
     public String toString() {
-        return "Food Supply : " + getFoodSup() + "\n" +
-                "Fuel Supply : " + getFuelSup() + "\n" +
-                "Oxygen Supply : " + getOxSup() + "\n" +
+        return "Food Supply : " + getFoodSupply() + "\n" +
+                "Fuel Supply : " + getFuelSupply() + "\n" +
+                "Oxygen Supply : " + getOxSupply() + "\n" +
                 "Water Supply : " + getWaterSupply() + "\n" +
                 "Oxygen Reclamation Rate : " + getOxReclaimRate() + "\n" +
                 "Water Reclamation Rate : " + getWaterReclaimRate() + "\n";
