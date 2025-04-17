@@ -4,14 +4,16 @@ public class CrewMember {
     private String sex;
     private double height;
     private double weight;
+    private double exercise;
 
     // Constructor
-    public CrewMember(String name, int age, String sex, double height, double weight) {
-        this.name = name;
-        this.setAge(age);
-        this.setSex(sex);
-        this.setHeight(height);
-        this.setWeight(weight);
+    public CrewMember(String name, int age, String sex, double height, double weight, double exercise) {
+        setName(name);
+        setAge(age);
+        setSex(sex);
+        setHeight(height);
+        setWeight(weight);
+        setExercise(exercise);
     }
 
     // Getter methods
@@ -33,6 +35,10 @@ public class CrewMember {
 
     public double getWeight() {
         return weight;
+    }
+
+    public double getExercise() {
+        return exercise;
     }
 
     // Setter methods with validation
@@ -89,7 +95,26 @@ public class CrewMember {
             this.weight = weight;
             return true;
         }
-        System.out.println("Invalid weight. Weight must be between 100 and 250.");
+        System.out.println("Invalid weight. Weight must be between 50 and 120.");
         return false;
+    }
+
+    public boolean setExercise(double exercise) {
+        if (exercise >= 0 && exercise < 12) {
+            this.exercise = exercise;
+            return true;
+        }
+        System.out.println("Invalid Exercise. Exercise must be between 0 and 12.");
+        return false;
+    }
+
+    @Override
+    public String toString() {
+        return "Name : " + getName() + "\n" +
+                "Age : " + getAge() + "\n" +
+                "Sex : " + getSex() + "\n" +
+                "Height : " + getHeight() + "\n" +
+                "Weight : " + getWeight() + "\n" +
+                "Exercise : " + getExercise() + "\n";
     }
 }

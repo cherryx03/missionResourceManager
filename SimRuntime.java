@@ -68,10 +68,11 @@ public class SimRuntime {
 
         // Third: Crew Members
         // 9. String memberName
-        // 10. int memberAge         [n]
-        // 11. String memberSex
-        // 11. double memberHeight  [cm]
-        // 12. double memberWeight  [kg]
+        // 10. int memberAge            [n]
+        // 11. String memberSex         [M/F]
+        // 11. double memberHeight      [cm]
+        // 12. double memberWeight      [kg]
+        // 13. double memberExercise    [hr/day]
         // Repeat Crew Members
 
         ArrayList<String> fileContents = fileHandler.readFile();
@@ -96,20 +97,26 @@ public class SimRuntime {
             boolean addSuccess;
             String memberTag;
             int memberNum = 0;
-            for(int i = 8; i<fileContents.size(); i+=5){
+            for(int i = 8; i<fileContents.size(); i+=6){
                 memberNum+=1;
                 memberTag = "Member "+ memberNum;
-                addSuccess = vehicle.addCrewMember(new CrewMember(
+                addSuccess = vehicle.addCrewMember(
+                    new CrewMember(
                         fileContents.get(i).replace(memberTag+" Name : ",""),
                         Integer.parseInt(fileContents.get(i+1).replace(memberTag+" Age : ","")),
                         fileContents.get(i+2).replace(memberTag+" Sex : ",""),
                         Integer.parseInt(fileContents.get(i+3).replace(memberTag+" Height : ","")),
-                        Integer.parseInt(fileContents.get(i+4).replace(memberTag+" Weight : ",""))
-                        )
+                        Integer.parseInt(fileContents.get(i+4).replace(memberTag+" Weight : ","")),
+                        Integer.parseInt(fileContents.get(i+5).replace(memberTag+" Exercise : ",""))
+                    )
                 );
 
                 if(!addSuccess){return false;}
             }
+
+//            for(CrewMember crewMember : vehicle.getCrewMembers()){
+//                System.out.println(crewMember);
+//            }
 
             // Print contents for demo
 
