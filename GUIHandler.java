@@ -138,7 +138,14 @@ public class GUIHandler {
     private JPanel memberPanelSetup(Vehicle vehicle){
 //        if(isFirstSubmit()){
 //            crewPanel.removeAll();
-        int crewSize = Integer.parseInt(crewField.getText());
+        int crewSize;
+
+        try {
+            crewSize = Integer.parseInt(crewField.getText());
+        } catch (NumberFormatException e) {
+            crewSize = 1;
+        }
+
         vehicle.setCrewSize(crewSize);
 
 //            for(int i=0; i<crewSize; i++) {

@@ -76,6 +76,10 @@ public class SimRuntime {
 
         ArrayList<String> fileContents = fileHandler.readFile();
 
+//        for(String str : fileContents){
+//            System.out.println(str);
+//        }
+
         try{
 
             // Add file information to vehicle
@@ -91,8 +95,10 @@ public class SimRuntime {
             // Add all crew members present in file to the new vehicle
             boolean addSuccess;
             String memberTag;
-            for(int i = 6; i<fileContents.size(); i+=5){
-                memberTag = "Member "+ i;
+            int memberNum = 0;
+            for(int i = 8; i<fileContents.size(); i+=5){
+                memberNum+=1;
+                memberTag = "Member "+ memberNum;
                 addSuccess = vehicle.addCrewMember(new CrewMember(
                         fileContents.get(i).replace(memberTag+" Name : ",""),
                         Integer.parseInt(fileContents.get(i+1).replace(memberTag+" Age : ","")),
@@ -107,9 +113,9 @@ public class SimRuntime {
 
             // Print contents for demo
 
-            for(String demoPrint:vehicle.toString().split(",")){
-                System.out.println(demoPrint);
-            }
+//            for(String demoPrint : vehicle.toString().split("\n")){
+//                System.out.println(demoPrint);
+//            }
 
         }catch(NumberFormatException e){
             System.out.println("---Invalid File Contents---");
@@ -123,9 +129,8 @@ public class SimRuntime {
 
         String[] fileContents = vehicle.toString().split("\n");
 
-        boolean success = fileHandler.writeFile(fileContents);
+        return fileHandler.writeFile(fileContents);
 
-        return success;
-    };
+    }
 
 }

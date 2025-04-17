@@ -4,8 +4,8 @@ import java.util.Scanner;
 
 public class FileHandler {
 
-//    private static String fileName = "simInputValid.txt";
-    private static String fileName = "simInputInvalid.txt";
+    private static String fileName = "simInputValid.txt";
+//    private static String fileName = "simInputInvalid.txt";
     private boolean fileGood;
     private final File inputFile;
 
@@ -44,8 +44,8 @@ public class FileHandler {
         try{
             inputScan = new Scanner(inputFile);
 
-            while(inputScan.hasNext()){
-                inputParse = inputScan.next();
+            while(inputScan.hasNextLine()){
+                inputParse = inputScan.nextLine();
                 fileContents.add(inputParse);
             }
         }
