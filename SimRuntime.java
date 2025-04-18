@@ -13,16 +13,8 @@ public class SimRuntime {
     SimRuntime(){
 
         vehicle = new Vehicle();
-
         calculator = new Calculator();
-        gui = new GUIHandler(vehicle);
         fileHandler = new FileHandler();
-
-//        gui.GUISetup(vehicle);
-//        gui.missionPanelSetup();
-
-        // This is an empty shell; once data is available, a new vehicle is constructed with those values.
-
 
     }
 
@@ -33,19 +25,19 @@ public class SimRuntime {
 
         if(fileHandler.isFileGood()){
             System.out.println("Input file [" + FileHandler.getFileName() + "] found.");
-            loadSuccess = loadFiles(fileHandler, vehicle);
+            loadSuccess = loadFiles(vehicle);
         }else{
             loadSuccess = false;
         }
 
         System.out.println("File Contents Retrieved : " + loadSuccess);
 
-        // The main flow of the program shall be populated after the auxiliary classes are fully determined
+        gui = new GUIHandler(this, vehicle);
 
     }
 
     // Initial Population of Vehicle Using Input File
-    private boolean loadFiles(FileHandler fileHandler, Vehicle vehicle){
+    private boolean loadFiles(Vehicle vehicle){
 
         // This method shall be filled after the structure of the vehicle class and of the input file is determined
         // Required behavior:
@@ -132,11 +124,11 @@ public class SimRuntime {
         return true;
     }
 
-    private boolean saveFile(FileHandler fileHandler, Vehicle vehicle){
+    public void saveFile(Vehicle vehicle){
 
         String[] fileContents = vehicle.toString().split("\n");
 
-        return fileHandler.writeFile(fileContents);
+        fileHandler.writeFile(fileContents);
 
     }
 

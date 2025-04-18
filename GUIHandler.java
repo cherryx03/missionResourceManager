@@ -5,8 +5,7 @@ import org.jfree.data.category.DefaultCategoryDataset;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.event.*;
 import java.util.List;
 
 public class GUIHandler {
@@ -37,11 +36,11 @@ public class GUIHandler {
     private JLabel airRecLabel;
     private JLabel watRecLabel;
 
-    GUIHandler(Vehicle vehicle){
+    GUIHandler(SimRuntime runtime, Vehicle vehicle){
         this.firstSubmit = true;
 
         // Create GUI elements before making the frame visible
-        frame = frameSetup();
+        frame = frameSetup(runtime, vehicle);
         //leftPanelSetup(frame); // Sets up missionPanel immediately
         //submitButtonSetup(vehicle, frame);
 
@@ -51,16 +50,25 @@ public class GUIHandler {
         frame.setVisible(true);
     }
 
-    private JFrame frameSetup(){
+    private JFrame frameSetup(SimRuntime runtime, Vehicle vehicle){
         JFrame frame = new JFrame("Mission Setup");
         frame.setSize(1200, 800);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setLayout(new BorderLayout());
+        frame.addWindowListener(new WindowAdapter(){
+            @Override
+            public void windowClosing(WindowEvent e) {
+                runtime.saveFile(vehicle);
+                frame.dispose();
+                System.exit(0);
+            }
+        });
+
         return frame;
     }
 
     private JFrame GUISetup(Vehicle vehicle){
-        JFrame frame = frameSetup();
+
         JPanel leftPanel = leftPanelSetup();
 //        JPanel missionPanel = missionPanelSetup(leftPanel);
 //        leftPanel.add(missionPanel);

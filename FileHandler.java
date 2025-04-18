@@ -59,19 +59,30 @@ public class FileHandler {
 
     public boolean writeFile(String[] fileContents){
 
-        if(fileGood) {
+        if(isFileGood()) {
 
             try (PrintWriter printer = new PrintWriter(inputFile)) {
-
                 for (String line : fileContents) {
                     printer.println(line);
                 }
+                setFileGood(true);
+            }catch (FileNotFoundException e){
+                setFileGood(false);
 
-            }catch (FileNotFoundException e){setFileGood(false);}
+                if(createFile(new File(getFileName()))) {
+                    setFileGood(writeFile(fileContents));
+                }
+            }
 
-        }else{return false;}
+        }else{
+            if(inputFile.delete()){
+                if(createFile(new File(getFileName()))){
+                    setFileGood(writeFile(fileContents));
+                }
+            }else{setFileGood(false);}
+        }
 
-        return true;
+        return isFileGood();
     }
 
     private boolean createFile(File inputFile){
