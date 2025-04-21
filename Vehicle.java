@@ -77,10 +77,8 @@ public class Vehicle {
     public String toString(){
 
         String returnString =
-                    "Crew Size : " + getCrewSize() + "\n" +
+                    "Crew Size : " + vehicleCrew.size() + "\n" +
                     "Mission Length : " + getMissionLength() + "\n" + vehicleRes.toString();
-                            
-                    
         int memberCount=1;
         for(CrewMember member:vehicleCrew){
 
