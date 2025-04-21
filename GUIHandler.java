@@ -6,6 +6,7 @@ import org.jfree.data.category.DefaultCategoryDataset;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.util.ArrayList;
 import java.util.List;
 
 public class GUIHandler {
@@ -159,9 +160,8 @@ public class GUIHandler {
     private JPanel memberPanelSetup(Vehicle vehicle){
 //        if(isFirstSubmit()){
 //            crewPanel.removeAll();
-        int crewSize = Integer.parseInt(crewField.getText());
-        vehicle.setCrewSize(crewSize);
-        System.out.println("crewsize set.");
+        int crewSize = vehicle.getCrewSize();
+        System.out.println("crewsize set to " + crewSize);
 
 //            for(int i=0; i<crewSize; i++) {
 //                JPanel memberPanel = new JPanel();
@@ -293,16 +293,19 @@ public class GUIHandler {
         JTextField memberSex = new JTextField();
         JTextField memberExercise = new JTextField();
 
-        if(loadSuccess && memberIndex<vehicle.getCrewSize()){
-
-            CrewMember member = vehicle.getCrewMembers().get(memberIndex);
+//        System.out.println("crew size length: " + vehicle.getCrewSize());
+//        System.out.println("index: " + memberIndex);
+//        System.out.println("index check: " + (memberIndex<vehicle.getCrewSize()));
+//        System.out.println("3<3 check: " + (3<3));
+        ArrayList<CrewMember> members = vehicle.getCrewMembers();
+        if(loadSuccess && memberIndex<members.size()){
+            CrewMember member = members.get(memberIndex);
             memberName.setText(member.getName());
             memberAge.setText(String.valueOf(member.getAge()));
             memberHeight.setText(String.valueOf(member.getHeight()));
             memberWeight.setText(String.valueOf(member.getWeight()));
             memberSex.setText(member.getSex());
             memberExercise.setText(String.valueOf(member.getExercise()));
-
         }
 
         return new JTextField[]{memberName, memberAge, memberHeight, memberWeight, memberSex, memberExercise};
