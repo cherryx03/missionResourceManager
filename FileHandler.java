@@ -54,6 +54,8 @@ public class FileHandler {
             return null;
         }
 
+//        System.out.println(fileContents);
+
         return fileContents;
     }
 
@@ -62,9 +64,13 @@ public class FileHandler {
         if(isFileGood()) {
 
             try (PrintWriter printer = new PrintWriter(inputFile)) {
-                for (String line : fileContents) {
-                    printer.println(line);
+                for(int i=0; i<fileContents.length; i++){
+                    printer.print(fileContents[i]);
+                    if(i!=fileContents.length-1){
+                        printer.print('\n');
+                    }
                 }
+
                 setFileGood(true);
             }catch (FileNotFoundException e){
                 setFileGood(false);

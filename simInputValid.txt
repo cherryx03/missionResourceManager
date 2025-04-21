@@ -1,26 +1,26 @@
 Crew Size : 3
 Mission Length : 108.5
-Food Supply : 350000
-Fuel Supply : 1000000
-Oxygen Supply : 200000
-Water Supply : 300000
-Oxygen Reclamation Rate : 15
-Water Reclamation Rate : 12
+Food Supply : 350000.0
+Fuel Supply : 1000000.0
+Oxygen Supply : 200000.0
+Water Supply : 300000.0
+Oxygen Reclamation Rate : 15.0
+Water Reclamation Rate : 12.0
 Member 1 Name : DummyName1
 Member 1 Age : 20
 Member 1 Sex : M
-Member 1 Height : 200
-Member 1 Weight : 90
-Member 1 Exercise : 2
+Member 1 Height : 200.0
+Member 1 Weight : 90.0
+Member 1 Exercise : 2.0
 Member 2 Name : DummyName2
 Member 2 Age : 20
 Member 2 Sex : F
-Member 2 Height : 150
-Member 2 Weight : 60
-Member 2 Exercise : 1
+Member 2 Height : 150.0
+Member 2 Weight : 60.0
+Member 2 Exercise : 1.0
 Member 3 Name : DummyName3
 Member 3 Age : 20
 Member 3 Sex : M
-Member 3 Height : 180
-Member 3 Weight : 75
-Member 3 Exercise : 0
+Member 3 Height : 180.0
+Member 3 Weight : 75.0
+Member 3 Exercise : 0.0

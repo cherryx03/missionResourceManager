@@ -1,10 +1,13 @@
 import java.util.ArrayList;
 
 public class Vehicle {
+
     private int crewSize;
     private double missionLength;
     public VehicleResources vehicleRes;
     private ArrayList<CrewMember> vehicleCrew;
+
+    private boolean valuesLoadedFromFile;
 
     Vehicle(){
         this.crewSize = 0;
@@ -41,6 +44,10 @@ public class Vehicle {
 
     public double getMissionLength() {return missionLength;}
 
+    public boolean areValuesLoadedFromFile() {
+        return valuesLoadedFromFile;
+    }
+
     public void setCrewSize(int crewSize) {
         this.crewSize = crewSize;
     }
@@ -65,6 +72,8 @@ public class Vehicle {
         vehicleRes.setOxSupply(ox);
     }
 
+    public void setValuesLoadedFromFile(boolean valuesLoadedFromFile){this.valuesLoadedFromFile = valuesLoadedFromFile;}
+
     public String toString(){
 
         String returnString =
@@ -74,12 +83,16 @@ public class Vehicle {
                     
         int memberCount=1;
         for(CrewMember member:vehicleCrew){
-            returnString += "\n" +
+
+            if(memberCount!=1){returnString+="\n";}
+
+            returnString +=
                     "Member " + memberCount + " Name : " + member.getName() + "\n" +
                     "Member " + memberCount + " Age : " + member.getAge() + "\n" +
                     "Member " + memberCount + " Sex : " + member.getSex() + "\n" +
                     "Member " + memberCount + " Height : " + member.getHeight() + "\n" +
-                    "Member " + memberCount + " Weight : " + member.getWeight();
+                    "Member " + memberCount + " Weight : " + member.getWeight() + "\n" +
+                    "Member " + memberCount + " Exercise : " + member.getExercise();
             memberCount++;
         }
 
