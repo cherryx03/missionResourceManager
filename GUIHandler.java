@@ -62,7 +62,6 @@ public class GUIHandler {
             public void windowClosing(WindowEvent e) {
                 runtime.saveFile(vehicle);
                 frame.dispose();
-                System.exit(0);
             }
         });
 
@@ -143,7 +142,7 @@ public class GUIHandler {
 //                    frame.repaint();
                     secondSubmit = true;
                 } else {
-                    System.out.println("second+ time");
+                    System.out.println("second(+) time");
                     //TODO: take all inputs
                     // call calculator
                     // create charts
@@ -174,13 +173,13 @@ public class GUIHandler {
 //            }
 
         for (int i = 0; i < crewSize; i++) {
-            System.out.println("crewmember num. " + i+1);
+//            System.out.println("crewmember num. " + (i+1));
             JPanel memberPanel = new JPanel();
             memberPanel.setLayout(new GridLayout(6, 2));
             memberPanel.setBorder(BorderFactory.createTitledBorder("Crewmember " + (i + 1)));
 
             JLabel[] memberLabels = createMemberLabels();
-            JTextField[] memberFields = createMemberFields();
+            JTextField[] memberFields = createMemberFields(vehicle, i);
 
             addLabelsWithFields(memberPanel, memberLabels, memberFields);
 
@@ -285,15 +284,29 @@ public class GUIHandler {
         };
     }
 
-    private JTextField[] createMemberFields(){
-        return new JTextField[]{
-                new JTextField(),
-                new JTextField(),
-                new JTextField(),
-                new JTextField(),
-                new JTextField(),
-                new JTextField()
-        };
+    private JTextField[] createMemberFields(Vehicle vehicle, int memberIndex){
+
+        JTextField memberName = new JTextField();
+        JTextField memberAge = new JTextField();
+        JTextField memberHeight = new JTextField();
+        JTextField memberWeight = new JTextField();
+        JTextField memberSex = new JTextField();
+        JTextField memberExercise = new JTextField();
+
+        if(loadSuccess && memberIndex<vehicle.getCrewSize()){
+
+            CrewMember member = vehicle.getCrewMembers().get(memberIndex);
+            memberName.setText(member.getName());
+            memberAge.setText(String.valueOf(member.getAge()));
+            memberHeight.setText(String.valueOf(member.getHeight()));
+            memberWeight.setText(String.valueOf(member.getWeight()));
+            memberSex.setText(member.getSex());
+            memberExercise.setText(String.valueOf(member.getExercise()));
+
+        }
+
+        return new JTextField[]{memberName, memberAge, memberHeight, memberWeight, memberSex, memberExercise};
+
     }
 
     private JLabel[] createMissionLabels(){
@@ -322,7 +335,7 @@ public class GUIHandler {
         watRecField = new JTextField();
 
         if(loadSuccess) {
-            System.out.println(vehicle);
+//            System.out.println(vehicle);
             crewField.setText(String.valueOf(vehicle.getCrewSize()));
             lengthField.setText(String.valueOf(vehicle.getMissionLength()));
             fuelField.setText(String.valueOf(vehicle.vehicleRes.getFuelSupply()));

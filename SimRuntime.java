@@ -34,6 +34,8 @@ public class SimRuntime {
 
         gui = new GUIHandler(this, vehicle, loadSuccess);
 
+        System.out.println("\nvehicle after gui");
+        System.out.println(vehicle);
     }
 
     // Initial Population of Vehicle Using Input File
