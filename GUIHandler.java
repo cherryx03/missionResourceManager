@@ -37,7 +37,7 @@ public class GUIHandler {
     private JLabel airRecLabel;
     private JLabel watRecLabel;
 
-    GUIHandler(SimRuntime runtime, Vehicle vehicle, boolean loadSuccess){
+    GUIHandler(SimRuntime runtime, Vehicle vehicle, boolean loadSuccess, Calculator calculator){
         this.firstSubmit = true;
         this.loadSuccess = loadSuccess;
 
@@ -48,7 +48,7 @@ public class GUIHandler {
 
 //        frame.setVisible(true);
         //this.firstSubmit = true;
-        frame = GUISetup(vehicle);
+        frame = GUISetup(vehicle, calculator);
         frame.setVisible(true);
     }
 
@@ -68,14 +68,14 @@ public class GUIHandler {
         return frame;
     }
 
-    private JFrame GUISetup(Vehicle vehicle){
+    private JFrame GUISetup(Vehicle vehicle, Calculator calculator){
 
         JPanel leftPanel = leftPanelSetup(vehicle);
 //        JPanel missionPanel = missionPanelSetup(leftPanel);
 //        leftPanel.add(missionPanel);
         JPanel rightPanel = rightPanelSetup();
         //submitButtonSetup(vehicle, frame);
-        JButton submitButton = submitButtonSetup(vehicle, frame);
+        JButton submitButton = submitButtonSetup(vehicle, frame, calculator);
         frame.add(leftPanel, BorderLayout.WEST);
         frame.add(rightPanel, BorderLayout.EAST);
         frame.add(submitButton, BorderLayout.SOUTH);
@@ -114,39 +114,26 @@ public class GUIHandler {
         return rightPanel;
     }
 
-    private JButton submitButtonSetup(Vehicle vehicle, JFrame frame){
+    private JButton submitButtonSetup(Vehicle vehicle, JFrame frame, Calculator calculator){
         JButton submitButton = new JButton("Submit");
         submitButton.addActionListener(new ActionListener() {
-            // submitButton.addActionListener(new ActionHandler(vehicle, this));
             boolean secondSubmit = false;
-            // frame.add(submitButton, BorderLayout.SOUTH);
             @Override
             public void actionPerformed(ActionEvent e) {
-                System.out.println("button pressed");
                 if (!secondSubmit) {
-                    System.out.println("first time");
-                    //int crewSize = Integer.parseInt(crewField.getText());
-                    //crewPanel.removeAll();
-                    //for (int i = 0; i < crewSize; i++) {
                     takeFirstInputs(vehicle);
-//                    System.out.println(vehicle);
                     leftPanel.add(crewPanelSetup(), BorderLayout.CENTER);
                     crewPanel = memberPanelSetup(vehicle);
-                    //crewPanel.add(memberPanel);
-                    //}
-                    //frame.add(crewPanel);
                     crewPanel.revalidate();
 
-//                    secondSubmit = true;
-//                    frame.revalidate();
-//                    frame.repaint();
                     secondSubmit = true;
                 } else {
-                    System.out.println("second(+) time");
-                    //TODO: take all inputs
-                    // call calculator
-                    // create charts
                     takeCrewInputs(vehicle);
+                    
+                    // TODO: call calculator
+                    //Calculator calculator;
+                    updateCharts(vehicle, calculator);
+                    // TODO: create charts
                     frame.revalidate();
                 }
                 frame.revalidate();
@@ -157,23 +144,9 @@ public class GUIHandler {
     }
 
     private JPanel memberPanelSetup(Vehicle vehicle){
-//        if(isFirstSubmit()){
-//            crewPanel.removeAll();
-        int crewSize = Integer.parseInt(crewField.getText());
-        vehicle.setCrewSize(crewSize);
-        System.out.println("crewsize set.");
-
-//            for(int i=0; i<crewSize; i++) {
-//                JPanel memberPanel = new JPanel();
-//                memberPanel.setLayout(new GridLayout(6, 2));
-//                memberPanel.setBorder(BorderFactory.createTitledBorder("Crewmember " + (i + 1)));
-//                addLabels(memberPanel, createMemberLabels());
-//                addFields(memberPanel, createMemberFields());
-//                crewPanel.add(memberPanel);
-//            }
+        int crewSize = vehicle.getCrewSize();
 
         for (int i = 0; i < crewSize; i++) {
-//            System.out.println("crewmember num. " + (i+1));
             JPanel memberPanel = new JPanel();
             memberPanel.setLayout(new GridLayout(6, 2));
             memberPanel.setBorder(BorderFactory.createTitledBorder("Crewmember " + (i + 1)));
@@ -215,8 +188,7 @@ public class GUIHandler {
     private void takeCrewInputs(Vehicle vehicle){
         // Populate crew members from input panels
         for (Component comp : crewPanel.getComponents()) {
-            if (comp instanceof JPanel) {
-                JPanel memberPanel = (JPanel) comp;
+            if (comp instanceof JPanel memberPanel) {
                 JTextField nameField = (JTextField) memberPanel.getComponent(1);
                 JTextField ageField = (JTextField) memberPanel.getComponent(3);
                 JTextField heightField = (JTextField) memberPanel.getComponent(5);
@@ -236,9 +208,6 @@ public class GUIHandler {
                 vehicle.addCrewMember(member);
             }
         }
-
-//        // Proceed to calculate and display updated charts
-//        updateCharts(vehicle, calculator);
     }
 
     public void updateCharts(Vehicle vehicle, Calculator calculator){

@@ -3,11 +3,10 @@ import java.util.ArrayList;
 
 public class SimRuntime {
 
-    private GUIHandler gui;
     private FileHandler fileHandler;
 
     private Vehicle vehicle;
-    private Calculator calculator;
+    public Calculator calculator;
 
     // Constructor
     SimRuntime(){
@@ -32,7 +31,7 @@ public class SimRuntime {
 
         System.out.println("File Contents Retrieved : " + loadSuccess);
 
-        gui = new GUIHandler(this, vehicle, loadSuccess);
+        GUIHandler gui = new GUIHandler(this, vehicle, loadSuccess, calculator);
 
         System.out.println("\nvehicle after gui");
         System.out.println(vehicle);
