@@ -2,7 +2,7 @@
 import java.util.ArrayList;
 
 public class SimRuntime {
-
+    private GUIHandler gui;
     private FileHandler fileHandler;
 
     private Vehicle vehicle;
@@ -20,25 +20,25 @@ public class SimRuntime {
     // Core operation of program
     public void run(){
 
-        boolean loadSuccess;
+        boolean loadSuccess;// (for now!!)
 
         if(fileHandler.isFileGood()){
             System.out.println("Input file [" + FileHandler.getFileName() + "] found.");
-            loadSuccess = loadFiles(vehicle);
+            loadSuccess = true;//(vehicle);
         }else{
             loadSuccess = false;
         }
 
-        System.out.println("File Contents Retrieved : " + loadSuccess);
+        //System.out.println("File Contents Retrieved : " + loadSuccess);
 
-        GUIHandler gui = new GUIHandler(this, vehicle, loadSuccess, calculator);
+        gui = new GUIHandler(this, vehicle, loadSuccess, calculator);
 
         System.out.println("\nvehicle after gui");
         System.out.println(vehicle);
     }
 
     // Initial Population of Vehicle Using Input File
-    private boolean loadFiles(Vehicle vehicle){
+    boolean loadFiles(Vehicle vehicle){
         /**
              Required behavior:
              - Extract file contents
