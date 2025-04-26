@@ -42,7 +42,7 @@ public class GUIHandler {
         this.loadSuccess = loadSuccess;
         // Create GUI elements before making the frame visible
         frame = frameSetup(runtime, vehicle);
-        frame = GUISetup(vehicle, calculator);
+        frame = GUISetup(vehicle, calculator, runtime);
         frame.setVisible(true);
     }
 
@@ -61,14 +61,29 @@ public class GUIHandler {
         return frame;
     }
 
-    private JFrame GUISetup(Vehicle vehicle, Calculator calculator){
+    private JFrame GUISetup(Vehicle vehicle, Calculator calculator, SimRuntime runtime){
         JPanel leftPanel = leftPanelSetup(vehicle);
         JPanel rightPanel = rightPanelSetup();
+        JButton loadButton = loadButtonSetup(vehicle, frame, runtime);
         JButton submitButton = submitButtonSetup(vehicle, frame, calculator);
         frame.add(leftPanel, BorderLayout.WEST);
         frame.add(rightPanel, BorderLayout.EAST);
         frame.add(submitButton, BorderLayout.SOUTH);
+        frame.add(loadButton, BorderLayout.NORTH);
         return frame;
+    }
+    //TODO: THIS IS NEW BUTTON TO LOAD
+    // SHOULD WORK?
+    // IF IT DOESNT, COMMENT OUT 'frame.add(loadButton, BorderLayout.NORTH);' ABOVE
+    private JButton loadButtonSetup(Vehicle vehicle, JFrame frame, SimRuntime runtime){
+        JButton loadButton = new JButton("Load data from file...");
+        loadButton.addActionListener(new ActionListener() {
+                                           @Override
+                                           public void actionPerformed(ActionEvent e) {
+                                               loadSuccess = runtime.loadFiles(vehicle);
+                                           }
+        };
+        return loadButton;
     }
 
     private JPanel leftPanelSetup(Vehicle vehicle){
@@ -102,20 +117,51 @@ public class GUIHandler {
         JButton submitButton = new JButton("Submit");
         submitButton.addActionListener(new ActionListener() {
             boolean secondSubmit = false;
+            //boolean otherSubmit = false;
             @Override
             public void actionPerformed(ActionEvent e) {
-                if (!secondSubmit) {
+                if (!secondSubmit){// && !otherSubmit) {
                     takeFirstInputs(vehicle);
                     leftPanel.add(crewPanelSetup(), BorderLayout.CENTER);
                     crewPanel = memberPanelSetup(vehicle);
                     crewPanel.revalidate();
 
                     secondSubmit = true;
-                } else {
+                } else {//if (!otherSubmit) {
+
                     takeCrewInputs(vehicle);
                     updateCharts(vehicle, calculator);
                     // TODO: make charts interactable .........
                     frame.revalidate();
+                    //TODO: commented stuff below was me trying to make sure that the button being pressed over&over&over
+                    // didn't add on infinite crew members etc.
+                    // will either finish or remove by Monday when final deliverable is due
+
+                    //otherSubmit = true;
+//                } else {
+//                    double[] newArr = {
+//                            Double.parseDouble(lengthField.getText()),
+//                            Integer.parseInt(crewField.getText()),
+//                            Double.parseDouble(foodField.getText()),
+//                            Double.parseDouble(waterField.getText()),
+//                            Double.parseDouble(oxygenField.getText()),
+//                            Double.parseDouble(fuelField.getText())
+//                    };
+//                    double[] oldArr = {
+//                            vehicle.getMissionLength(),           // double
+//                            vehicle.getCrewSize(),                // int -> double, automatically promoted yippie
+//                            vehicle.vehicleRes.getFoodSupply(),   // double
+//                            vehicle.vehicleRes.getWaterSupply(),  // double
+//                            vehicle.vehicleRes.getOxSupply(),     // double
+//                            vehicle.vehicleRes.getFuelSupply()    // double
+//                    };
+//                        if (oldArr != newArr) {
+//                            takeFirstInputs(vehicle);
+//                            crewPanel.removeAll();
+//                            crewPanel = memberPanelSetup(vehicle);
+//                            takeCrewInputs(vehicle);
+//                            crewPanel.revalidate();
+//                        }
                 }
                 frame.revalidate();
                 frame.repaint();
@@ -126,7 +172,6 @@ public class GUIHandler {
 
     private JPanel memberPanelSetup(Vehicle vehicle){
         int crewSize = vehicle.getCrewSize();
-
         for (int i = 0; i < crewSize; i++) {
             JPanel memberPanel = new JPanel();
             memberPanel.setLayout(new GridLayout(6, 2));
