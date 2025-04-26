@@ -25,7 +25,6 @@ public class Calculator {
         return total;
     }
 
-
     public double getDailyFoodConsumption(CrewMember member) {
         // Placeholder: adjust by sex and weight
         double base = 3035;

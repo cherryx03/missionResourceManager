@@ -24,7 +24,7 @@ public class SimRuntime {
         boolean loadSuccess;
 
         if(fileHandler.isFileGood()){
-            System.out.println("Input file [" + FileHandler.getFileName() + "] found.");
+            System.out.println("\nInput file [" + FileHandler.getFileName() + "] found.");
             loadSuccess = loadFiles(vehicle);
         }else{
             loadSuccess = false;
@@ -32,14 +32,14 @@ public class SimRuntime {
 
         System.out.println("File Contents Retrieved : " + loadSuccess);
 
-        gui = new GUIHandler(this, vehicle, loadSuccess);
+        gui = new GUIHandler(this, vehicle, loadSuccess, calculator);
 
-        System.out.println("\nvehicle after gui");
-        System.out.println(vehicle);
+//        System.out.println("\nvehicle after gui");
+//        System.out.println(vehicle);
     }
 
     // Initial Population of Vehicle Using Input File
-    private boolean loadFiles(Vehicle vehicle){
+    public boolean loadFiles(Vehicle vehicle){
         /**
              Required behavior:
              - Extract file contents
@@ -107,8 +107,6 @@ public class SimRuntime {
                                     Double.parseDouble(fileContents.get(i + 5).replace(memberTag + " Exercise : ", ""))
                             )
                     );
-
-
 
                     loadSuccess = addSuccess;
                 }

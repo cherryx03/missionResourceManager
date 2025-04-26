@@ -32,6 +32,9 @@ public class Vehicle {
     public CrewMember removeCrewMemberByIndex(int memberPos){
         return vehicleCrew.remove(memberPos);
     }
+    public void clearCrew(){
+        vehicleCrew = new ArrayList<CrewMember>();
+    }
 
     // getCrewMembers added by cw
     public ArrayList<CrewMember> getCrewMembers() {
